@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel
 
 class Window(QWidget):
 
@@ -10,10 +10,26 @@ class Window(QWidget):
 
         self.start_gui()
 
+    def show_result(self):
+        self.display_label.setText(self.result)
+
+    def _register_value(self, value):
+            self.operation += value
+            self.display_label.setText(self.operation)
+
+    def _make_operation(self):
+            self.result = f"{eval(self.operation)}"
+            self.operation = self.result
+            self.show_result()
+
     def create_button(self, text, value):
+
         button = QPushButton(text)
         button.value = value
-        button.clicked.connect(lambda: print(f"Soy el boton con el valor: {button.value}"))
+        if value == "=":
+            button.clicked.connect(lambda: self._make_operation())
+        else:
+            button.clicked.connect(lambda: self._register_value(button.value))
         return button
 
     def create_row(self, row):
@@ -35,9 +51,24 @@ class Window(QWidget):
             button_row = self.create_row(row)
             calculator.addLayout(button_row)
         return calculator
+    
+    def create_elements(self):
+        
+        self.mainbox = QVBoxLayout()
+
+        self.calculator = self.create_matrix()
+        self.display_label = QLabel("Welcome to Calculator :)")
+        self.display_label.resize(100,50)
+
+        self.mainbox.addLayout(self.calculator)
+        self.mainbox.addWidget(self.display_label)
+        self.setLayout(self.mainbox)
+         
 
     def start_gui(self):
 
-        self.calculator = self.create_matrix()
-        self.setLayout(self.calculator)
+        self.operation = ""
+        self.result = 0
+
+        self.create_elements()
         self.show()
