@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath /home/cross/VSCode/Python/Python-Calculadora/.venv)
+    export VIRTUAL_ENV=$(cygpath /home/cross/inicio/VSCode/Python/Python-Calculadora/.venv)
 else
     # use the path as-is
-    export VIRTUAL_ENV=/home/cross/VSCode/Python/Python-Calculadora/.venv
+    export VIRTUAL_ENV=/home/cross/inicio/VSCode/Python/Python-Calculadora/.venv
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"

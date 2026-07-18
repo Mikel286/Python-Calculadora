@@ -1,4 +1,4 @@
-#!/home/cross/VSCode/Python/Python-Calculadora/.venv/bin/python3
+#!/home/cross/inicio/VSCode/Python/Python-Calculadora/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
