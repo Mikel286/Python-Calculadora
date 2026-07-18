@@ -5,21 +5,21 @@ class Window(QWidget):
     def __init__(self, position_x, position_y, width, height):
         
         super().__init__()
-        self.setWindowTitle("Calculadora")
+        self.setWindowTitle("Cross Calculator")
         self.setGeometry(position_x, position_y, width, height)
 
         self.start_gui()
 
     def show_result(self):
-        self.display_label.setText(self.result)
+        self.display_label.setText(self._result)
 
     def _register_value(self, value):
-            self.operation += value
-            self.display_label.setText(self.operation)
+            self._operation += value
+            self.display_label.setText(self._operation)
 
     def _make_operation(self):
-            self.result = f"{eval(self.operation)}"
-            self.operation = self.result
+            self._result = f"{eval(self._operation)}"
+            self._operation = self._result
             self.show_result()
 
     def create_button(self, text, value):
@@ -52,23 +52,26 @@ class Window(QWidget):
             calculator.addLayout(button_row)
         return calculator
     
+    def create_label(self):
+        display_label = QLabel("Welcome to Calculator :)")
+        return display_label
+    
     def create_elements(self):
         
         self.mainbox = QVBoxLayout()
 
         self.calculator = self.create_matrix()
-        self.display_label = QLabel("Welcome to Calculator :)")
-        self.display_label.resize(100,50)
+        self.display_label = self.create_label()
 
-        self.mainbox.addLayout(self.calculator)
         self.mainbox.addWidget(self.display_label)
+        self.mainbox.addLayout(self.calculator)
         self.setLayout(self.mainbox)
          
 
     def start_gui(self):
 
-        self.operation = ""
-        self.result = 0
+        self._operation = ""
+        self._result = 0
 
         self.create_elements()
         self.show()
