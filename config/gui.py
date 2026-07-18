@@ -71,7 +71,41 @@ class Window(QWidget):
         self.mainbox.addWidget(self.display_label)
         self.mainbox.addLayout(self.calculator)
         self.setLayout(self.mainbox)
-         
+
+    def set_style(self):
+
+        self.setStyleSheet("""
+        QWidget {
+            background-color: #3D3D3D;
+            color: white;
+            font-family: Space Mono;
+            font-size: 16px;
+        }
+
+        QLabel {
+            background-color: #676767;
+            border-radius: 7px;
+            padding: 12px;
+            font-size: 20px;
+            font-weight: 300;
+            qproperty-alignment: AlignRight;
+        }
+
+        QPushButton {
+            background-color: #464646;
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        QPushButton:hover {
+            background-color: #4A4A4A;
+        }
+
+        QPushButton:pressed {
+            background-color: #5C5C5C;
+        }
+    """)
 
     def start_gui(self):
 
@@ -79,4 +113,5 @@ class Window(QWidget):
         self._result = 0
 
         self.create_elements()
+        self.set_style()
         self.show()
