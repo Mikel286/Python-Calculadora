@@ -18,9 +18,14 @@ class Window(QWidget):
             self.display_label.setText(self._operation)
 
     def _make_operation(self):
+        try:
             self._result = f"{eval(self._operation)}"
             self._operation = self._result
             self.show_result()
+        except SyntaxError:
+            self.display_label.setText("Operación invalida...")
+            self._operation = ""
+            self._result = ""
 
     def create_button(self, text, value):
 
